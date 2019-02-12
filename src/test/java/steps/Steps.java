@@ -1,5 +1,7 @@
 package steps;
 
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -13,11 +15,11 @@ public class Steps {
 
     @Given("^User open login page$")
     public void userOpenLoginPage() {
-        System.setProperty("webdriver.chrome.driver", "aici tre sa pui calea spre chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\dlavraniuc\\ChromeDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         loginPO = new LoginPage(driver);
 
-        driver.navigate().to("aici scrii linku la pagina care o testezi");
+        driver.navigate().to("https://www.orsay.com");
 
     }
 
@@ -28,6 +30,12 @@ public class Steps {
 
     @Then("^User is logged in$")
     public void userIsLoggedIn() {
+
+    }
+
+    @After
+    public void cleanup(Scenario scenario) {
+        driver.close();
 
     }
 }
