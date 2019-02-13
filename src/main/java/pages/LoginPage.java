@@ -25,7 +25,7 @@ public class LoginPage extends PageObject {
     }
 
     public void ClickOn_ItemAccount() {
-        driver.findElement((By) icon_Account).click();
+        icon_Account.click();
     }
 
     public void login(String username, String password) {
@@ -33,4 +33,6 @@ public class LoginPage extends PageObject {
         passwordTextBox.sendKeys(password);
         loginButton.click();
     }
+
+
 }
