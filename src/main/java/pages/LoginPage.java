@@ -1,11 +1,10 @@
 package pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import static java.lang.Thread.*;
 
 public class LoginPage extends PageObject {
 
@@ -21,6 +20,9 @@ public class LoginPage extends PageObject {
     @FindBy(css = "#dwfrm_login button[type='submit']")
     private WebElement loginButton;
 
+    @FindBy(css = "div.veNoClick")
+    private WebElement cancelMarketingInfo;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -34,8 +36,22 @@ public class LoginPage extends PageObject {
         passwordTextBox.clear();
         userNameTextBox.sendKeys(username);
         passwordTextBox.sendKeys(password);
+
+        try {
+            cancelMarketingInfo.click();
+        } catch (NoSuchElementException e) {
+        }
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", loginButton);
         loginButton.click();
     }
 
 
+    private boolean isElementVisible(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 }
