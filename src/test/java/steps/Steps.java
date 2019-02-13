@@ -1,7 +1,7 @@
 package steps;
-import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
-
 import java.util.concurrent.TimeUnit;
 
 public class Steps {
@@ -23,27 +22,29 @@ public class Steps {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPO = new LoginPage(driver);
         driver.navigate().to("https://www.orsay.com");
-        String actualTitle = driver.getTitle();
         driver.manage().window().maximize();
-        String expectedTitle = "Orsay Home";
-        Assert.assertEquals("Condition true", actualTitle, expectedTitle);
-
     }
-    @When("^User login with correct username as \"([^\"]*)\" and password as \"([^\"]*)\"$")
-    public void userLoginWithCorrectUsernameAsAndPasswordAs(String username,String password)throws Throwable {
+    @When("^User click on Account$")
+    public void userClickOnAccount() {
+        loginPO.ClickOn_ItemAccount();
+    }
+    @And("^User login with correct username as \"([^\"]*)\" and password as \"([^\"]*)\"$")
+    public void userLoginWithCorrectUsernameAsAndPasswordAs(String username, String password) throws Throwable {
         loginPO.login("dorina.lavraniuc@gmail.com","lavraniuc.S1");
-        throw new PendingException();
     }
 
     @Then("^User is logged in$")
     public void userIsLoggedIn() {
-
+        String actualTitle = driver.getTitle();
+        String expectedTitle = "Orsay Startseite";
+        Assert.assertEquals("Condition true", actualTitle, expectedTitle);
     }
 
     @After
     public void cleanup(Scenario scenario) {
         driver.close();
     }
+
 
 
 }

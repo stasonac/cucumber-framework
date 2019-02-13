@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends PageObject {
 
-
     @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[3]/div[2]/a/i")
     private WebElement icon_Account;
 
