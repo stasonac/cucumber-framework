@@ -28,9 +28,9 @@ public class Steps {
     public void userClickOnAccount() {
         loginPO.ClickOn_ItemAccount();
     }
-    @And("^User login with correct username as \"([^\"]*)\" and password as \"([^\"]*)\"$")
+    @And("^User login with correct username as (.*) and password as (.*)$")
     public void userLoginWithCorrectUsernameAsAndPasswordAs(String username, String password) throws Throwable {
-        loginPO.login("dorina.lavraniuc@gmail.com","lavraniuc.S1");
+        loginPO.login(username,password);
     }
 
     @Then("^User is logged in$")
