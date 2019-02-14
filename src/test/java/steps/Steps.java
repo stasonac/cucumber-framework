@@ -59,4 +59,76 @@ public class Steps {
 
         driver.close();
     }
+
+    @Given("^User navigate to Login Page$")
+    public void userNavigateToLoginPage() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\dlavraniuc\\ChromeDriver\\chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--window-size=1224,968");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        loginPO = new LoginPage(driver);
+        accountPO = new AccountPage(driver);
+        driver.navigate().to("https://www.orsay.com/ro-ro/");
+        driver.manage().window().maximize();
+        
+    }
+
+    @When("^User click on “Account” button$")
+    public void userClickOnAccountButton() {
+        loginPO.ClickOn_ItemAccount();
+    }
+
+    @Then("^New page is displayed and the Create an account now button is enabled$")
+    public void newPageIsDisplayedAndTheCreateAnAccountNowButtonIsEnabled() {
+        accountPO.IsCreateAnAccountNowButtonEnnabled();
+    }
+
+    @When("^User click on Create an account now button$")
+    public void userClickOnCreateAnAccountNowButton() {
+        accountPO.ClickOn_CreateAnAccountNowButton();
+    }
+
+    @Then("^User is directed to the registration form and “Create Account” title is displayed$")
+    public void userIsDirectedToTheRegistrationFormAndCreateAccountTitleIsDisplayed() {
+        accountPO.getCreateAccountTitle();
+    }
+
+    @When("^User select Title as (.*)$")
+    public void userSelectTitleAsFrau() {
+        accountPO.SelectOptionTitle();
+        
+    }
+
+    @And("^User enters First Name as (.*) and Surname as (.*)$")
+    public void userEntersFirstNameAsDorinaSurnameAsLavraniuc(String FirstName,String SureName,String Email,String ConfirmEmail,String Password)throws Throwable{
+        accountPO.FillRegisterForm(FirstName,SureName,Email,ConfirmEmail,Password);
+    }
+
+
+    @And("^User select Date of Birthday : Date : (\\d+), Month:(\\d+),Year :(\\d+)$")
+    public void userSelectDateOfBirthdayDateMonthYear(int arg0, int arg1, int arg2) {
+        accountPO.SelectDateOfBirth();
+    }
+
+    @And("^User enters email address as (.*) and confirm email as (.*)$")
+    public void userEntersEmailAddressAsLavraniucDorinaGmailComAndConfirmEmailAsLavraniucDAndPasswordAsLavraniucD(int arg0, int arg1) {
+
+        
+    }
+    @And("User enters password as (.*)$")
+    public void userEntersPasswordAsLavraniucD(int arg0) {
+    }
+
+    @And("^User click on “To Register” button$")
+    public void userClickOnToRegisterButton() {
+        
+    }
+
+    @Then("^Account (.*)is created$")
+    public void accountDorinaLavraniucIsCreated() {
+    }
+
+
+
 }
