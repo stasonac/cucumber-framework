@@ -1,4 +1,5 @@
 package pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +12,7 @@ public class AccountPage extends PageObject {
     @FindBy(css = "div.account-header-wrapper>h4")
     private WebElement accountOwner;
 
-    @FindBy(xpath = "//*[@id=\"primary\"]/div/div/h1/font/font")
+    @FindBy(css = "h1.account-heading")
     private WebElement createAccountTitle;
 
     @FindBy(css = "#dwfrm_login_register > div > button")
@@ -26,22 +27,22 @@ public class AccountPage extends PageObject {
     @FindBy(id = "dwfrm_profile_customer_lastname")
     private WebElement surnameTextBox;
 
-    @FindBy (id = "dwfrm_profile_customer_dayOfBirth")
+    @FindBy(id = "dwfrm_profile_customer_dayOfBirth")
     private WebElement date_DropDown;
 
-    @FindBy (id ="dwfrm_profile_customer_monthOfBirth")
+    @FindBy(id = "dwfrm_profile_customer_monthOfBirth")
     private WebElement month_DropDown;
 
-    @FindBy (id ="dwfrm_profile_customer_yearOfBirth")
+    @FindBy(id = "dwfrm_profile_customer_yearOfBirth")
     private WebElement year_DropDown;
 
-    @FindBy (id = "dwfrm_profile_customer_email")
+    @FindBy(id = "dwfrm_profile_customer_email")
     private WebElement emailTextBox;
 
     @FindBy(id = "dwfrm_profile_customer_emailconfirm")
     private WebElement confirmEmailTextBox;
 
-    @FindBy (id ="dwfrm_profile_login_password_d0qyoqzkftdf")
+    @FindBy(id = "dwfrm_profile_login_password_d0qyoqzkftdf")
     private WebElement passwordTextBox;
 
     @FindBy(xpath = "//*[@id=\"RegistrationForm\"]/div[12]/div/div/div/div[1]/button")
@@ -55,63 +56,60 @@ public class AccountPage extends PageObject {
         return accountOwner.getText();
     }
 
-    public boolean IsCreateAnAccountNowButtonEnnabled () {
+    public boolean IsCreateAnAccountNowButtonEnnabled() {
 
         try {
-            return createAnAccountNowButton.isDisplayed() & createAnAccountNowButton.isEnabled();
-            }
-        catch (Exception e)
-        {
+            return createAnAccountNowButton.isEnabled();
+        } catch (Exception e) {
             return false;
         }
 
     }
-    public void ClickOn_CreateAnAccountNowButton (){
+
+    public void ClickOn_CreateAnAccountNowButton() {
         createAnAccountNowButton.click();
     }
 
-    public String getCreateAccountTitle(){
+    public String getCreateAccountTitle() {
         return createAccountTitle.getText();
     }
-     public void SelectDateOfBirth(){
-         Select date = new Select(date_DropDown);
-         date.selectByValue("4");
-     }
 
-     public void SelectMonthOfBirth(){
-        Select month = new Select(month_DropDown);
-        month.selectByVisibleText("Juli");
-     }
-
-     public void SelectYearOfBirth(){
-        Select year =new Select(year_DropDown);
-        year.selectByValue("1987");
-     }
-
-     public void SelectOptionTitle (){
-        Select title = new Select (title_DropDown);
-        title.selectByVisibleText("Frau");
+    public void SelectDateOfBirth(String value) {
+        Select date = new Select(date_DropDown);
+        date.selectByValue(value);
     }
 
-    public void FillRegisterForm(String FirstName,String SureName,String Email,String ConfirmEmail,String Password){
-        SelectOptionTitle();
+    public void SelectMonthOfBirth(String value) {
+        Select month = new Select(month_DropDown);
+        month.selectByVisibleText(value);
+    }
+
+    public void SelectYearOfBirth(String value) {
+        Select year = new Select(year_DropDown);
+        year.selectByValue(value);
+    }
+
+    public void SelectOptionTitle(String title) {
+        Select selector = new Select(title_DropDown);
+        selector.selectByVisibleText(title);
+    }
+
+    public void FillRegisterForm(String title, String FirstName, String SureName, String birtday, String Email, String Password) {
+        String bd[] = birtday.split(" ");
+        SelectOptionTitle(title);
         firstNameTextBox.sendKeys(FirstName);
         surnameTextBox.sendKeys(SureName);
-        SelectDateOfBirth();
-        SelectMonthOfBirth();
-        SelectYearOfBirth();
+        SelectDateOfBirth(bd[0]);
+        SelectMonthOfBirth(bd[1]);
+        SelectYearOfBirth(bd[2]);
         emailTextBox.sendKeys(Email);
-        confirmEmailTextBox.sendKeys(ConfirmEmail);
+        confirmEmailTextBox.sendKeys(Email);
         passwordTextBox.sendKeys(Password);
     }
 
-    public void ClickOn_ToRegisterButton(){
+    public void ClickOn_ToRegisterButton() {
         toRegisterButton.click();
     }
-
-
-
-
 
 
 }

@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
@@ -15,6 +16,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import pages.AccountPage;
 import pages.LoginPage;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Steps {
@@ -24,7 +26,7 @@ public class Steps {
 
     @Given("^User open login page$")
     public void userOpenLoginPage() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\dlavraniuc\\ChromeDriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Stas\\workspace\\drivere\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1224,968");
         driver = new ChromeDriver(options);
@@ -34,13 +36,15 @@ public class Steps {
         driver.navigate().to("https://www.orsay.com/ro-ro/");
         driver.manage().window().maximize();
     }
+
     @When("^User click on Account$")
     public void userClickOnAccount() {
         loginPO.ClickOn_ItemAccount();
     }
+
     @And("^User login with correct username as (.*) and password as (.*)$")
     public void userLoginWithCorrectUsernameAsAndPasswordAs(String username, String password) throws Throwable {
-        loginPO.login(username,password);
+        loginPO.login(username, password);
     }
 
     @Then("^User (.*) is logged in$")
@@ -60,20 +64,6 @@ public class Steps {
         driver.close();
     }
 
-    @Given("^User navigate to Login Page$")
-    public void userNavigateToLoginPage() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\dlavraniuc\\ChromeDriver\\chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--window-size=1224,968");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        loginPO = new LoginPage(driver);
-        accountPO = new AccountPage(driver);
-        driver.navigate().to("https://www.orsay.com/ro-ro/");
-        driver.manage().window().maximize();
-        
-    }
-
     @When("^User click on “Account” button$")
     public void userClickOnAccountButton() {
         loginPO.ClickOn_ItemAccount();
@@ -81,7 +71,7 @@ public class Steps {
 
     @Then("^New page is displayed and the Create an account now button is enabled$")
     public void newPageIsDisplayedAndTheCreateAnAccountNowButtonIsEnabled() {
-        accountPO.IsCreateAnAccountNowButtonEnnabled();
+        Assert.assertTrue(accountPO.IsCreateAnAccountNowButtonEnnabled());
     }
 
     @When("^User click on Create an account now button$")
@@ -89,40 +79,14 @@ public class Steps {
         accountPO.ClickOn_CreateAnAccountNowButton();
     }
 
-    @Then("^User is directed to the registration form and “Create Account” title is displayed$")
-    public void userIsDirectedToTheRegistrationFormAndCreateAccountTitleIsDisplayed() {
-        accountPO.getCreateAccountTitle();
-    }
-
-    @When("^User select Title as (.*)$")
-    public void userSelectTitleAsFrau() {
-        accountPO.SelectOptionTitle();
-        
-    }
-
-    @And("^User enters First Name as (.*) and Surname as (.*)$")
-    public void userEntersFirstNameAsDorinaSurnameAsLavraniuc(String FirstName,String SureName,String Email,String ConfirmEmail,String Password)throws Throwable{
-        accountPO.FillRegisterForm(FirstName,SureName,Email,ConfirmEmail,Password);
-    }
-
-
-    @And("^User select Date of Birthday : Date : (\\d+), Month:(\\d+),Year :(\\d+)$")
-    public void userSelectDateOfBirthdayDateMonthYear(int arg0, int arg1, int arg2) {
-        accountPO.SelectDateOfBirth();
-    }
-
-    @And("^User enters email address as (.*) and confirm email as (.*)$")
-    public void userEntersEmailAddressAsLavraniucDorinaGmailComAndConfirmEmailAsLavraniucDAndPasswordAsLavraniucD(int arg0, int arg1) {
-
-        
-    }
-    @And("User enters password as (.*)$")
-    public void userEntersPasswordAsLavraniucD(int arg0) {
+    @Then("^User is directed to the registration form and (.*) title is displayed$")
+    public void userIsDirectedToTheRegistrationFormAndCreateAccountTitleIsDisplayed(String expectedTitle) {
+        Assert.assertEquals(expectedTitle, accountPO.getCreateAccountTitle());
     }
 
     @And("^User click on “To Register” button$")
     public void userClickOnToRegisterButton() {
-        
+
     }
 
     @Then("^Account (.*)is created$")
@@ -130,5 +94,16 @@ public class Steps {
     }
 
 
-
+    @When("^User fill the form with the following data$")
+    public void userFillTheFormWithTheFollowingData(DataTable table) {
+        Map<String, String> inputs = table.asMap(String.class, String.class);
+        accountPO.FillRegisterForm(
+                inputs.get("title"),
+                inputs.get("firstName"),
+                inputs.get("surname"),
+                inputs.get("birtday"),
+                inputs.get("email"),
+                inputs.get("password")
+        );
+    }
 }
