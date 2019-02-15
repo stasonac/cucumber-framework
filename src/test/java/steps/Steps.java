@@ -14,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.AccountPage;
 import pages.LoginPage;
+import sun.security.util.Password;
 
 import java.util.concurrent.TimeUnit;
 
@@ -81,7 +82,8 @@ public class Steps {
 
     @Then("^New page is displayed and the Create an account now button is enabled$")
     public void newPageIsDisplayedAndTheCreateAnAccountNowButtonIsEnabled() {
-        accountPO.IsCreateAnAccountNowButtonEnnabled();
+        Assert.assertEquals(true,accountPO.IsCreateAnAccountNowButtonEnnabled());
+
     }
 
     @When("^User click on Create an account now button$")
@@ -89,46 +91,64 @@ public class Steps {
         accountPO.ClickOn_CreateAnAccountNowButton();
     }
 
-    @Then("^User is directed to the registration form and “Create Account” title is displayed$")
-    public void userIsDirectedToTheRegistrationFormAndCreateAccountTitleIsDisplayed() {
-        accountPO.getCreateAccountTitle();
+    @Then("^User is directed to the registration form and “Creați un cont” title is displayed$")
+    public void userIsDirectedToTheRegistrationFormAndCreateAccountTitleIsDisplayed(String Title) {
+        String expectedMessage = String.format("Creați un cont", Title);
+        Assert.assertEquals(expectedMessage, accountPO.getCreateAccountTitle());
     }
 
     @When("^User select Title as (.*)$")
-    public void userSelectTitleAsFrau() {
+    public void userSelectTitleAsDna() {
         accountPO.SelectOptionTitle();
         
     }
 
     @And("^User enters First Name as (.*) and Surname as (.*)$")
-    public void userEntersFirstNameAsDorinaSurnameAsLavraniuc(String FirstName,String SureName,String Email,String ConfirmEmail,String Password)throws Throwable{
-        accountPO.FillRegisterForm(FirstName,SureName,Email,ConfirmEmail,Password);
+    public void userEntersFirstNameAsAlinaSurnameAsLavraniuc(String FirstName,String SureName)throws Throwable{
+        accountPO.FillFirstNameSurename(FirstName,SureName);
     }
 
-
-    @And("^User select Date of Birthday : Date : (\\d+), Month:(\\d+),Year :(\\d+)$")
-    public void userSelectDateOfBirthdayDateMonthYear(int arg0, int arg1, int arg2) {
+    @And("^User select Date of Birthday : Date : (\\d+)$")
+    public void userSelectDateOfBirthdayDate(int arg0) {
         accountPO.SelectDateOfBirth();
     }
 
-    @And("^User enters email address as (.*) and confirm email as (.*)$")
-    public void userEntersEmailAddressAsLavraniucDorinaGmailComAndConfirmEmailAsLavraniucDAndPasswordAsLavraniucD(int arg0, int arg1) {
-
-        
+    @And("^User select Month:(\\d+)$")
+    public void userSelectMonth(int arg0) {
+    accountPO.SelectMonthOfBirth();
     }
+
+    @And("^User select Year :(\\d+)$")
+    public void userSelectYear(int arg0) {
+    accountPO.SelectYearOfBirth();
+    }
+
+    @And("^User enters email address as (.*) and confirm email as (.*)$")
+    public void userEntersEmailAddressAsLavraniucDorinaGmailComAndConfirmEmailAsLavraniucDAndPasswordAsLavraniucD(String Email,String ConfirmEmail) {
+        accountPO.TypeEmailAndConfirmEmail(Email,ConfirmEmail);
+    }
+
     @And("User enters password as (.*)$")
-    public void userEntersPasswordAsLavraniucD(int arg0) {
+    public void userEntersPasswordAsLavraniucD(String Password) {
+        accountPO.TypePassword(Password);
     }
 
     @And("^User click on “To Register” button$")
     public void userClickOnToRegisterButton() {
+        accountPO.ClickOn_ToRegisterButton();
         
     }
 
     @Then("^Account (.*)is created$")
-    public void accountDorinaLavraniucIsCreated() {
+    public void accountDorinaLavraniucIsCreated(String user) {
+        String expectedMessage = String.format("Bine ați revenit, %s!", user);
+        Assert.assertEquals(expectedMessage, accountPO.getWellcomeAccountOwnerMessage());
+
     }
-
-
-
 }
+
+
+
+
+
+

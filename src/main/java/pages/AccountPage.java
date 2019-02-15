@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import sun.awt.SunHints;
 
 public class AccountPage extends PageObject {
     @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[2]/a/img")
@@ -51,9 +52,11 @@ public class AccountPage extends PageObject {
         super(driver);
     }
 
+
     public String getWellcomeAccountOwnerMessage() {
         return accountOwner.getText();
     }
+
 
     public boolean IsCreateAnAccountNowButtonEnnabled () {
 
@@ -73,7 +76,8 @@ public class AccountPage extends PageObject {
     public String getCreateAccountTitle(){
         return createAccountTitle.getText();
     }
-     public void SelectDateOfBirth(){
+
+    public void SelectDateOfBirth(){
          Select date = new Select(date_DropDown);
          date.selectByValue("4");
      }
@@ -90,20 +94,21 @@ public class AccountPage extends PageObject {
 
      public void SelectOptionTitle (){
         Select title = new Select (title_DropDown);
-        title.selectByVisibleText("Frau");
+        title.selectByVisibleText("Dna");
     }
 
-    public void FillRegisterForm(String FirstName,String SureName,String Email,String ConfirmEmail,String Password){
-        SelectOptionTitle();
+    public void FillFirstNameSurename(String FirstName,String SureName){
         firstNameTextBox.sendKeys(FirstName);
         surnameTextBox.sendKeys(SureName);
-        SelectDateOfBirth();
-        SelectMonthOfBirth();
-        SelectYearOfBirth();
+    }
+     public void TypeEmailAndConfirmEmail (String Email, String ConfirmEmail){
         emailTextBox.sendKeys(Email);
         confirmEmailTextBox.sendKeys(ConfirmEmail);
+     }
+
+     public void TypePassword (String Password){
         passwordTextBox.sendKeys(Password);
-    }
+     }
 
     public void ClickOn_ToRegisterButton(){
         toRegisterButton.click();
