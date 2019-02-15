@@ -26,7 +26,7 @@ public class Steps {
 
     @Given("^User open login page$")
     public void userOpenLoginPage() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Stas\\workspace\\drivere\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\dlavraniuc\\ChromeDriver\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1224,968");
         driver = new ChromeDriver(options);
