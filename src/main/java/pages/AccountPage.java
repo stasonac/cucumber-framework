@@ -60,7 +60,7 @@ public class AccountPage extends PageObject {
         try {
             return createAnAccountNowButton.isDisplayed() & createAnAccountNowButton.isEnabled();
             }
-        catch (Exception)
+        catch (Exception e)
         {
             return false;
         }
