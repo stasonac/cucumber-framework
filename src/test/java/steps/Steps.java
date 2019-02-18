@@ -1,4 +1,5 @@
 package steps;
+
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -14,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.AccountPage;
 import pages.LoginPage;
+
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -91,35 +93,28 @@ public class Steps {
     }
 
     @Given("^User is on Account Page$")
-    public void userIsOnAccountPage(DataTable table) {
-        Map<String, String> inputs = table.asMap(String.class, String.class);
+    public void userIsOnAccountPage(String username, String password) throws Throwable {
         userOpenLoginPage();
         loginPO.ClickOn_ItemAccount();
-        accountPO.ClickOn_CreateAnAccountNowButton();
-        accountPO.FillRegisterForm(
-                inputs.get("title"),
-                inputs.get("firstName"),
-                inputs.get("surname"),
-                inputs.get("birtday"),
-                inputs.get("email"),
-                inputs.get("password")
-        );
-        accountPO.ClickOn_ToRegisterButton();}
-
+        loginPO.login(username, password);
+        }
 
     @When("^Clicking on Sign out button$")
     public void clickingOnSignOutButton() {
-        accountPO.ClickOn_SignUp_Button();
+        accountPO.ClickOn_SignOut_Button();
     }
 
     @Then("^User is redirected on Registration Page$")
     public void userIsRedirectedOnRegistrationPage(String message) {
-        String expectedMessage = String.format("Logare,%s!",message);
-        Assert.assertEquals(expectedMessage,loginPO.getLoginMessage());
-
-
+        String expectedMessage = String.format("Logare,%s!", message);
+        Assert.assertEquals(expectedMessage, loginPO.getLoginMessage());
     }
 }
+
+
+
+
+
 
 
 

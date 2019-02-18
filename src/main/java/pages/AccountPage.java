@@ -119,7 +119,7 @@ public class AccountPage extends PageObject {
         toRegisterButton.click();
     }
 
-    public void ClickOn_SignUp_Button (){
+    public void ClickOn_SignOut_Button (){
         SignOut_Button.click();
     }
 
