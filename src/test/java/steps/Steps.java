@@ -115,9 +115,8 @@ public class Steps {
     }
 
     @Then("^User is redirected on Registration Page$")
-    public void userIsRedirectedOnRegistrationPage(String message) {
-        String expectedMessage = String.format("Logare,%s!", message);
-        Assert.assertEquals(expectedMessage, loginPO.getLoginMessage());
+    public void userIsRedirectedOnRegistrationPage() {
+        Assert.assertEquals("Logare", loginPO.getLoginMessage());
     }
 
 

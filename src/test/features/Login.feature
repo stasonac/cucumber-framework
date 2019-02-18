@@ -13,8 +13,14 @@ Feature: Log in/Log out Page
   @dor
   Scenario: Check that user can log out from Account Page
     Given User is on Account Page
-      | username  | dorina.lavraniuc@gmail.com |
-      | passsword | lavraniuc.S1               |
+      | username | dorina.lavraniuc@gmail.com |
+      | password | lavraniuc.S1               |
     When  Clicking on Sign out button
     Then User is redirected on Registration Page
+
+
+    Scenario: Check that user is able to add products in the basket
+      Given: User navigate to login page
+      When: User add selected products
+      Then: Selected products is added successfully in the basket
 
