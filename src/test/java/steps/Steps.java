@@ -43,9 +43,15 @@ public class Steps {
         loginPO.ClickOn_ItemAccount();
     }
 
-    @And("^User login with correct username as (.*) and password as (.*)$")
-    public void userLoginWithCorrectUsernameAsAndPasswordAs(String username, String password) throws Throwable {
-        loginPO.login(username, password);
+    @And("^User login with correct username and password$")
+    public void userLoginWithCorrectUsernameAndPassword(DataTable table) {
+        Map<String, String> inputs = table.asMap(String.class, String.class);
+        userOpenLoginPage();
+        loginPO.ClickOn_ItemAccount();
+        loginPO.login(
+                inputs.get ("username"),
+                inputs.get ("password")
+        );
     }
 
     @Then("^User (.*) is logged in$")
@@ -93,10 +99,14 @@ public class Steps {
     }
 
     @Given("^User is on Account Page$")
-    public void userIsOnAccountPage(String username, String password) throws Throwable {
+    public void userIsOnAccountPage(DataTable table){
+    Map<String, String> inputs = table.asMap(String.class, String.class);
         userOpenLoginPage();
         loginPO.ClickOn_ItemAccount();
-        loginPO.login(username, password);
+        loginPO.login(
+                inputs.get ("username"),
+                inputs.get ("password")
+                );
         }
 
     @When("^Clicking on Sign out button$")
@@ -109,6 +119,8 @@ public class Steps {
         String expectedMessage = String.format("Logare,%s!", message);
         Assert.assertEquals(expectedMessage, loginPO.getLoginMessage());
     }
+
+
 }
 
 

@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         glue = {"steps"},
         plugin = {"pretty", "html:target/cucumber-reports"},
         monochrome = true,
-        tags = {"@Login"}
+        tags = {"@dor"}
 )
 public class TestRunner {
 }
