@@ -1,5 +1,7 @@
 package runners;
 import cucumber.api.CucumberOptions;
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
@@ -9,7 +11,7 @@ import org.junit.runner.RunWith;
         glue = {"steps"},
         plugin = {"pretty", "html:target/cucumber-reports"},
         monochrome = true,
-        tags = {"@CreateAccount"}
+        tags = {"@dorina"}
 )
 public class TestRunner {
 }

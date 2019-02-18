@@ -23,6 +23,9 @@ public class LoginPage extends PageObject {
     @FindBy(css = "div.veNoClick")
     private WebElement cancelMarketingInfo;
 
+    @FindBy(css = "#main > div.container > div.breadcrumb > span")
+    private WebElement LogareMessage;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -46,7 +49,6 @@ public class LoginPage extends PageObject {
         loginButton.click();
     }
 
-
     private boolean isElementVisible(WebElement element) {
         try {
             return element.isDisplayed();
@@ -54,4 +56,9 @@ public class LoginPage extends PageObject {
             return false;
         }
     }
+
+    public String getLoginMessage() {
+        return LogareMessage.getText();}
+
+
 }

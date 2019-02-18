@@ -1,5 +1,4 @@
 package steps;
-
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -15,7 +14,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.AccountPage;
 import pages.LoginPage;
-
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +33,7 @@ public class Steps {
         accountPO = new AccountPage(driver);
         driver.navigate().to("https://www.orsay.com/ro-ro/");
         driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
     }
 
     @When("^User click on Account$")
@@ -50,7 +49,7 @@ public class Steps {
     @Then("^User (.*) is logged in$")
     public void userIsLoggedIn(String user) {
         String expectedMessage = String.format("Bine ați revenit, %s!", user);
-        Assert.assertEquals(expectedMessage, accountPO.getWellcomeAccountOwnerMessage());
+        Assert.assertEquals(expectedMessage, accountPO.getWelcomeAccountOwnerMessage());
     }
 
     @After
@@ -64,38 +63,15 @@ public class Steps {
         driver.close();
     }
 
-    @When("^User click on “Account” button$")
-    public void userClickOnAccountButton() {
+    @Given("^User on create new account page$")
+    public void userOnCreateNewAccountPage() {
+        userOpenLoginPage();
         loginPO.ClickOn_ItemAccount();
-    }
-
-    @Then("^New page is displayed and the Create an account now button is enabled$")
-    public void newPageIsDisplayedAndTheCreateAnAccountNowButtonIsEnabled() {
-        Assert.assertTrue(accountPO.IsCreateAnAccountNowButtonEnnabled());
-    }
-
-    @When("^User click on Create an account now button$")
-    public void userClickOnCreateAnAccountNowButton() {
         accountPO.ClickOn_CreateAnAccountNowButton();
     }
 
-    @Then("^User is directed to the registration form and (.*) title is displayed$")
-    public void userIsDirectedToTheRegistrationFormAndCreateAccountTitleIsDisplayed(String expectedTitle) {
-        Assert.assertEquals(expectedTitle, accountPO.getCreateAccountTitle());
-    }
-
-    @And("^User click on “To Register” button$")
-    public void userClickOnToRegisterButton() {
-
-    }
-
-    @Then("^Account (.*)is created$")
-    public void accountDorinaLavraniucIsCreated() {
-    }
-
-
-    @When("^User fill the form with the following data$")
-    public void userFillTheFormWithTheFollowingData(DataTable table) {
+    @When("^User fill new account form and submit it$")
+    public void userFillNewAccountFormAndSubmitIt(DataTable table) {
         Map<String, String> inputs = table.asMap(String.class, String.class);
         accountPO.FillRegisterForm(
                 inputs.get("title"),
@@ -105,5 +81,45 @@ public class Steps {
                 inputs.get("email"),
                 inputs.get("password")
         );
+        accountPO.ClickOn_ToRegisterButton();
+    }
+
+    @Then("^New Account (.*) is created$")
+    public void newAccountIsCreated(String user) {
+        String expectedMessage = String.format("Bine ați revenit, %s!", user);
+        Assert.assertEquals(expectedMessage, accountPO.getWelcomeAccountOwnerMessage());
+    }
+
+    @Given("^User is on Account Page$")
+    public void userIsOnAccountPage(DataTable table) {
+        Map<String, String> inputs = table.asMap(String.class, String.class);
+        userOpenLoginPage();
+        loginPO.ClickOn_ItemAccount();
+        accountPO.ClickOn_CreateAnAccountNowButton();
+        accountPO.FillRegisterForm(
+                inputs.get("title"),
+                inputs.get("firstName"),
+                inputs.get("surname"),
+                inputs.get("birtday"),
+                inputs.get("email"),
+                inputs.get("password")
+        );
+        accountPO.ClickOn_ToRegisterButton();}
+
+
+    @When("^Clicking on Sign out button$")
+    public void clickingOnSignOutButton() {
+        accountPO.ClickOn_SignUp_Button();
+    }
+
+    @Then("^User is redirected on Registration Page$")
+    public void userIsRedirectedOnRegistrationPage(String message) {
+        String expectedMessage = String.format("Logare,%s!",message);
+        Assert.assertEquals(expectedMessage,loginPO.getLoginMessage());
+
+
     }
 }
+
+
+

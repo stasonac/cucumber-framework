@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,7 +28,7 @@ public class AccountPage extends PageObject {
     @FindBy(id = "dwfrm_profile_customer_lastname")
     private WebElement surnameTextBox;
 
-    @FindBy(id = "dwfrm_profile_customer_dayOfBirth")
+    @FindBy(xpath = "//*[@id=\"dwfrm_profile_customer_dayOfBirth\"]")
     private WebElement date_DropDown;
 
     @FindBy(id = "dwfrm_profile_customer_monthOfBirth")
@@ -42,17 +43,21 @@ public class AccountPage extends PageObject {
     @FindBy(id = "dwfrm_profile_customer_emailconfirm")
     private WebElement confirmEmailTextBox;
 
-    @FindBy(id = "dwfrm_profile_login_password_d0qyoqzkftdf")
+    @FindBy(css = "input.password")
     private WebElement passwordTextBox;
 
-    @FindBy(xpath = "//*[@id=\"RegistrationForm\"]/div[12]/div/div/div/div[1]/button")
+    @FindBy(css = " #RegistrationForm > div:nth-child(12) > div > div > div > div > button")
     private WebElement toRegisterButton;
+
+    @FindBy(css = "#primary > div.account-header-wrapper > a")
+    private WebElement SignOut_Button;
+
 
     public AccountPage(WebDriver driver) {
         super(driver);
     }
 
-    public String getWellcomeAccountOwnerMessage() {
+    public String getWelcomeAccountOwnerMessage() {
         return accountOwner.getText();
     }
 
@@ -94,21 +99,28 @@ public class AccountPage extends PageObject {
         selector.selectByVisibleText(title);
     }
 
-    public void FillRegisterForm(String title, String FirstName, String SureName, String birtday, String Email, String Password) {
-        String bd[] = birtday.split(" ");
+    public void FillRegisterForm(String title, String FirstName, String SureName, String birtDay, String Email, String Password) {
+        String bd[] = birtDay.split(" ");
         SelectOptionTitle(title);
         firstNameTextBox.sendKeys(FirstName);
         surnameTextBox.sendKeys(SureName);
+        ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
         SelectDateOfBirth(bd[0]);
         SelectMonthOfBirth(bd[1]);
         SelectYearOfBirth(bd[2]);
         emailTextBox.sendKeys(Email);
         confirmEmailTextBox.sendKeys(Email);
+        passwordTextBox.clear();
         passwordTextBox.sendKeys(Password);
     }
 
     public void ClickOn_ToRegisterButton() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", toRegisterButton);
         toRegisterButton.click();
+    }
+
+    public void ClickOn_SignUp_Button (){
+        SignOut_Button.click();
     }
 
 
