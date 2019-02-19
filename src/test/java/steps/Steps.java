@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.AccountPage;
 import pages.LoginPage;
+import pages.ShoppingCartPage;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +24,7 @@ public class Steps {
     private WebDriver driver;
     private LoginPage loginPO;
     private AccountPage accountPO;
+    private ShoppingCartPage shoppingCA;
 
     @Given("^User open login page$")
     public void userOpenLoginPage() {
@@ -33,6 +35,7 @@ public class Steps {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPO = new LoginPage(driver);
         accountPO = new AccountPage(driver);
+        shoppingCA = new ShoppingCartPage(driver);
         driver.navigate().to("https://www.orsay.com/ro-ro/");
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
@@ -120,6 +123,22 @@ public class Steps {
     }
 
 
+    @Given("^User navigate to login page$")
+    public void userNavigateToLoginPage() {
+       userOpenLoginPage();
+    }
+
+    @When("^User add selected products$")
+    public void userAddSelectedProducts() {
+        shoppingCA.SelectProducts();
+        shoppingCA.AddToShoppingCart();
+
+
+    }
+
+    @Then("^Selected products is added successfully in the basket$")
+    public void selectedProductsIsAddedSuccessfullyInTheBasket() {
+    }
 }
 
 
