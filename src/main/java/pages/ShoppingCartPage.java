@@ -1,5 +1,4 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -39,6 +38,12 @@ public class ShoppingCartPage extends PageObject {
    @FindBy(css="#checkout-form > button")
    private WebElement checkOut_Button;
 
+   @FindBy(xpath = "//*[@id=\"cart-table\"]/div[3]/div/div[2]/div[1]/div[2]/button")
+   private WebElement deleteLink;
+
+   @FindBy (css ="#primary > div > div.cart-empty > p")
+   private WebElement stateMessageAboutBasket;
+
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
     }
@@ -51,7 +56,6 @@ public class ShoppingCartPage extends PageObject {
         ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
        color_CheckBox.click();
     }
-
     public void AddToShoppingCart (){
         product_Item1.click();
         ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
@@ -66,6 +70,13 @@ public class ShoppingCartPage extends PageObject {
         catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
         }
+    }
+    public void DeleteProductsFromBasket(){
+        deleteLink.click();
+    }
+
+    public String getStateMessage_Basket(){
+        return stateMessageAboutBasket.getText();
     }
 
     }

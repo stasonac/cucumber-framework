@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends PageObject {
@@ -25,6 +22,18 @@ public class LoginPage extends PageObject {
 
     @FindBy(css = "#main > div.container > div.breadcrumb > span")
     private WebElement LogareMessage;
+
+    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[3]/div[1]/span/i")
+    private WebElement searchLink;
+
+    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[4]/div/form/input[1]")
+    private WebElement searchText_Box;
+
+    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[4]/div/form/button[2]/span")
+    private WebElement search_Button;
+
+    @FindBy(css="#main > div.container.clearfix > div.content-banner > h1")
+    private WebElement messageForSearchedProducts;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -59,6 +68,15 @@ public class LoginPage extends PageObject {
 
     public String getLoginMessage() {
         return LogareMessage.getText();}
+
+     public void SearchProducts(String typeOfProduct){
+        searchLink.click();
+        searchText_Box.sendKeys(typeOfProduct);
+        search_Button.click();
+     }
+     public String getMessageOfSearchedProduct(){
+        return messageForSearchedProducts.getText();
+     }
 
 
 }

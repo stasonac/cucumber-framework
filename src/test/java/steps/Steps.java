@@ -118,9 +118,9 @@ public class Steps {
         Assert.assertEquals("Logare", loginPO.getLoginMessage());
     }
 
-
     @Given("^User navigate to login page$")
-    public void userNavigateToLoginPage() {
+    public void userNavigateToLoginPage()
+    {
        userOpenLoginPage();
     }
 
@@ -128,14 +128,47 @@ public class Steps {
     public void userAddSelectedProducts() {
         shoppingCA.SelectProducts();
         shoppingCA.AddToShoppingCart();
-
     }
 
     @Then("^Selected products is added successfully in the basket$")
     public void selectedProductsIsAddedSuccessfullyInTheBasket() {
         Assert.assertEquals(true,shoppingCA.IsElementPresent());
-
     }
+
+    @Given("^Product is already added in basket$")
+    public void productIsAlreadyAddedInBasket() {
+        userOpenLoginPage();
+        shoppingCA.SelectProducts();
+        shoppingCA.AddToShoppingCart();
+    }
+
+    @When("^User click on Delete link$")
+    public void userClickOnDeleteLink() {
+        shoppingCA.DeleteProductsFromBasket();
+    }
+
+    @Then("^Product is deleted from basket$")
+    public void productIsDeletedFromBasket() {
+        Assert.assertEquals("Coșul dvs. este gol",shoppingCA.getStateMessage_Basket());
+    }
+
+    @Given("^User is on login page$")
+    public void userIsOnLoginPage() {
+        userOpenLoginPage();
+    }
+
+    @When("^User enters the type of product into search text-box$")
+    public void userEntersTheTypeOfProductIntoSearchTextBox(DataTable table) {
+        Map<String, String> inputs = table.asMap(String.class, String.class);
+        loginPO.SearchProducts(
+                inputs.get("typeOfProduct"));
+    }
+
+    @Then("^The type of searched product will be displayed on the page$")
+    public void theTypeOfSearchedProductWillBeDisplayedOnThePage() {
+        Assert.assertEquals("Rezultate pentru (blugi)",loginPO.getMessageOfSearchedProduct());
+    }
+
 }
 
 
