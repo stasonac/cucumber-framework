@@ -1,10 +1,10 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
@@ -30,16 +30,18 @@ public class ShoppingCartPage extends PageObject {
     @FindBy(xpath = "//*[@id=\"swatch-green\"]/span")
     private WebElement color_CheckBox;
 
-   @FindBy(xpath = "//*[@id=\"94118f15f94ddcb8de128996cf\"]/div[1]/a/div[2]/img")
-   private WebElement fustaMidi;
-
-   @FindBy(id="add-to-cart")
+   @FindBy(css="#add-to-cart")
    private WebElement addToCart_button;
+
+   @FindBy(css="#search-result-items > li:nth-child(1)")
+   private WebElement product_Item1;
+
+   @FindBy(css="#checkout-form > button")
+   private WebElement checkOut_Button;
 
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
     }
-
     public void SelectProducts (){
         products_Link.click();
         ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
@@ -51,14 +53,22 @@ public class ShoppingCartPage extends PageObject {
     }
 
     public void AddToShoppingCart (){
-
-        //document.getElementByTagName("li").item(2).className;
-
-    }
-
-    public void OpenShoppingCart (){
+        product_Item1.click();
+        ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
+        addToCart_button.click();
         basket_Link.click();
     }
+    public boolean IsElementPresent(){
+        try {
+            checkOut_Button.isDisplayed();
+                    return true;
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    }
 
 
 
@@ -69,4 +79,5 @@ public class ShoppingCartPage extends PageObject {
 
 
 
-}
+
+

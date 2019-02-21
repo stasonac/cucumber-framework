@@ -1,5 +1,4 @@
 package steps;
-
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -8,15 +7,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.AccountPage;
 import pages.LoginPage;
 import pages.ShoppingCartPage;
-
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -133,11 +129,12 @@ public class Steps {
         shoppingCA.SelectProducts();
         shoppingCA.AddToShoppingCart();
 
-
     }
 
     @Then("^Selected products is added successfully in the basket$")
     public void selectedProductsIsAddedSuccessfullyInTheBasket() {
+        Assert.assertEquals(true,shoppingCA.IsElementPresent());
+
     }
 }
 
