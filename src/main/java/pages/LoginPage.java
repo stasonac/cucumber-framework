@@ -53,7 +53,6 @@ public class LoginPage extends PageObject {
             cancelMarketingInfo.click();
         } catch (NoSuchElementException e) {
         }
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", loginButton);
         loginButton.click();
     }

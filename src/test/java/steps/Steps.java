@@ -45,7 +45,6 @@ public class Steps {
     @And("^User login with correct username and password$")
     public void userLoginWithCorrectUsernameAndPassword(DataTable table) {
         Map<String, String> inputs = table.asMap(String.class, String.class);
-        userOpenLoginPage();
         loginPO.ClickOn_ItemAccount();
         loginPO.login(
                 inputs.get ("username"),
@@ -169,6 +168,26 @@ public class Steps {
         Assert.assertEquals("Rezultate pentru (blugi)",loginPO.getMessageOfSearchedProduct());
     }
 
+    @Given("^Products is already on basket$")
+    public void productsIsAlreadyOnBasket(DataTable table) {
+        Map<String, String> inputs = table.asMap(String.class, String.class);
+        userOpenLoginPage();
+        loginPO.ClickOn_ItemAccount();
+        loginPO.login(
+                inputs.get("username"),
+                inputs.get("password")
+        );
+        shoppingCA.ClickOn_basket();
+    }
+
+    @When("^User Edits details of product which has been added in basket$")
+    public void userEditsDetailsOfProductWhichHasBeenAddedInBasket() {
+        shoppingCA.EditDetailsOfProduct();
+    }
+
+    @Then("^Details has been changed successfully$")
+    public void detailsHasBeenChangedSuccessfully() {
+    }
 }
 
 

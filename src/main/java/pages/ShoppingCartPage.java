@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ShoppingCartPage extends PageObject {
 
-    @FindBy(css = "#mini-cart > div.mini-cart-total > a > span > span")
+    @FindBy(xpath = "//*[@id=\"mini-cart\"]/div[1]/a/span")
     private WebElement basket_Link;
 
     @FindBy(xpath="//*[@id=\"wrapper\"]/header/div/nav/ul/li[2]/a")
@@ -44,6 +44,19 @@ public class ShoppingCartPage extends PageObject {
    @FindBy (css ="#primary > div > div.cart-empty > p")
    private WebElement stateMessageAboutBasket;
 
+   @FindBy(xpath = "//*[@id=\"cart-table\"]/div[7]/div/div[2]/div[1]/div[2]/div[2]/a")
+   private WebElement editDetails_Link;
+
+   @FindBy(xpath = "//*[@id=\"product-content\"]/div[4]/ul/li[1]/div[2]/ul/li[4]")
+   private WebElement color_Link;
+
+   @FindBy(xpath = "//*[@id=\"product-content\"]/div[4]/ul/li[2]/div[2]/ul/li[4]")
+   private WebElement size_Link;
+
+   @FindBy (xpath = "//*[@id=\"add-to-cart\"]")
+   private WebElement updated_Button;
+
+
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
     }
@@ -71,6 +84,11 @@ public class ShoppingCartPage extends PageObject {
             return false;
         }
     }
+
+    public void ClickOn_basket(){
+        basket_Link.click();
+    }
+
     public void DeleteProductsFromBasket(){
         deleteLink.click();
     }
@@ -78,6 +96,14 @@ public class ShoppingCartPage extends PageObject {
     public String getStateMessage_Basket(){
         return stateMessageAboutBasket.getText();
     }
+
+    public void EditDetailsOfProduct (){
+        editDetails_Link.click();
+        color_Link.click();
+        size_Link.click();
+        updated_Button.click();
+    }
+
 
     }
 
