@@ -48,11 +48,12 @@ public class LoginPage extends PageObject {
         passwordTextBox.clear();
         userNameTextBox.sendKeys(username);
         passwordTextBox.sendKeys(password);
+        ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
 
-        try {
-            cancelMarketingInfo.click();
-        } catch (NoSuchElementException e) {
-        }
+//        try {
+//            cancelMarketingInfo.click();
+//        } catch (NoSuchElementException e) {
+//        }
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", loginButton);
         loginButton.click();
     }

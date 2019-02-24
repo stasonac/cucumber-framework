@@ -12,8 +12,12 @@
       Then Product is deleted from basket
 @update
     Scenario: Edit Details of products from basket
-    Given Products is already on basket
-    When User Edits details of product which has been added in basket
+    Given User open login page
+    And User log in with correct username and password
+      | username | Stratu.Alz@gmail.com |
+      | password | lavraniuc.A7         |
+    And User go to products basket
+    When User edits product details
     Then Details has been changed successfully
 
 
