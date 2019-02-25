@@ -20,7 +20,7 @@ public class AccountPage extends PageObject {
     private WebElement createAnAccountNowButton;
 
     @FindBy(id = "dwfrm_profile_customer_salutation")
-    private WebElement title_DropDown;
+    private WebElement titleDropDown;
 
     @FindBy(id = "dwfrm_profile_customer_firstname")
     private WebElement firstNameTextBox;
@@ -29,13 +29,13 @@ public class AccountPage extends PageObject {
     private WebElement surnameTextBox;
 
     @FindBy(xpath = "//*[@id=\"dwfrm_profile_customer_dayOfBirth\"]")
-    private WebElement date_DropDown;
+    private WebElement dateDropDown;
 
     @FindBy(id = "dwfrm_profile_customer_monthOfBirth")
-    private WebElement month_DropDown;
+    private WebElement monthDropDown;
 
     @FindBy(id = "dwfrm_profile_customer_yearOfBirth")
-    private WebElement year_DropDown;
+    private WebElement year_DryearDropDown;
 
     @FindBy(id = "dwfrm_profile_customer_email")
     private WebElement emailTextBox;
@@ -50,7 +50,7 @@ public class AccountPage extends PageObject {
     private WebElement toRegisterButton;
 
     @FindBy(css = "#primary > div.account-header-wrapper > a")
-    private WebElement SignOut_Button;
+    private WebElement signOutButton;
 
 
     public AccountPage(WebDriver driver) {
@@ -80,22 +80,22 @@ public class AccountPage extends PageObject {
     }
 
     public void SelectDateOfBirth(String value) {
-        Select date = new Select(date_DropDown);
+        Select date = new Select(dateDropDown);
         date.selectByValue(value);
     }
 
     public void SelectMonthOfBirth(String value) {
-        Select month = new Select(month_DropDown);
+        Select month = new Select(monthDropDown);
         month.selectByVisibleText(value);
     }
 
     public void SelectYearOfBirth(String value) {
-        Select year = new Select(year_DropDown);
+        Select year = new Select(year_DryearDropDown);
         year.selectByValue(value);
     }
 
     public void SelectOptionTitle(String title) {
-        Select selector = new Select(title_DropDown);
+        Select selector = new Select(titleDropDown);
         selector.selectByVisibleText(title);
     }
 
@@ -120,7 +120,7 @@ public class AccountPage extends PageObject {
     }
 
     public void ClickOn_SignOut_Button (){
-        SignOut_Button.click();
+        signOutButton.click();
     }
 
 

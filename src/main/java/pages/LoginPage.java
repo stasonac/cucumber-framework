@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 public class LoginPage extends PageObject {
 
     @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[3]/div[2]/a/i")
-    private WebElement icon_Account;
+    private WebElement iconAccount;
 
     @FindBy(css = "#dwfrm_login input[type='text']")
     private WebElement userNameTextBox;
@@ -27,10 +27,10 @@ public class LoginPage extends PageObject {
     private WebElement searchLink;
 
     @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[4]/div/form/input[1]")
-    private WebElement searchText_Box;
+    private WebElement searchTextBox;
 
     @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[4]/div/form/button[2]/span")
-    private WebElement search_Button;
+    private WebElement searchButton;
 
     @FindBy(css="#main > div.container.clearfix > div.content-banner > h1")
     private WebElement messageForSearchedProducts;
@@ -40,7 +40,7 @@ public class LoginPage extends PageObject {
     }
 
     public void ClickOn_ItemAccount() {
-        icon_Account.click();
+        iconAccount.click();
     }
 
     public void login(String username, String password) {
@@ -71,8 +71,8 @@ public class LoginPage extends PageObject {
 
      public void SearchProducts(String typeOfProduct){
         searchLink.click();
-        searchText_Box.sendKeys(typeOfProduct);
-        search_Button.click();
+        searchTextBox.sendKeys(typeOfProduct);
+        searchButton.click();
      }
      public String getMessageOfSearchedProduct(){
         return messageForSearchedProducts.getText();

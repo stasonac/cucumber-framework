@@ -12,10 +12,11 @@ Feature: Log in/Log out Page
 
 @log-out
   Scenario: Check that user can log out from Account Page
-    Given User is on Account Page
+    Given User open login page
+    And User log in with correct username and password
       | username | Stratu.Alz@gmail.com |
       | password | lavraniuc.A7         |
-    When  Clicking on Sign out button
+    When  User Click on Sign out button
     Then User is redirected on Registration Page
 
 @search

@@ -69,7 +69,7 @@ public class Steps {
         driver.close();
     }
 
-    @Given("^User on create new account page$")
+    @Given("^User open login page$")
     public void userOnCreateNewAccountPage() {
         userOpenLoginPage();
         loginPO.ClickOn_ItemAccount();
@@ -96,18 +96,9 @@ public class Steps {
         Assert.assertEquals(expectedMessage, accountPO.getWelcomeAccountOwnerMessage());
     }
 
-    @Given("^User is on Account Page$")
-    public void userIsOnAccountPage(DataTable table){
-    Map<String, String> inputs = table.asMap(String.class, String.class);
-        userOpenLoginPage();
-        loginPO.ClickOn_ItemAccount();
-        loginPO.login(
-                inputs.get ("username"),
-                inputs.get ("password")
-                );
-        }
 
-    @When("^Clicking on Sign out button$")
+
+    @When("^User Click on Sign out button$")
     public void clickingOnSignOutButton() {
         accountPO.ClickOn_SignOut_Button();
     }

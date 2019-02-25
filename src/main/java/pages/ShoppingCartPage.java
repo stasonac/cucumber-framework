@@ -11,31 +11,31 @@ import java.util.List;
 public class ShoppingCartPage extends PageObject {
 
     @FindBy(css = "#mini-cart > div.mini-cart-total > a > i")
-    private WebElement basket_Link;
+    private WebElement basketLink;
 
     @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/nav/ul/li[2]/a")
-    private WebElement products_Link;
+    private WebElement productsLink;
 
     @FindBy(css = "//*[@id=\"secondary\"]/div/div[2]/div[2]/h3")
     private WebElement PriceLink;
 
     @FindBy(css = "#secondary div:nth-child(4) ul > li:nth-child(3) > a")
-    private WebElement price_CheckBox;
+    private WebElement priceCheckBox;
 
     @FindBy(xpath = "//*[@id=\"swatch-36_s\"]")
-    private WebElement size_CheckBox;
+    private WebElement sizeCheckBox;
 
     @FindBy(xpath = "//*[@id=\"swatch-green\"]/span")
-    private WebElement color_CheckBox;
+    private WebElement colorCheckBox;
 
     @FindBy(css = "#add-to-cart")
-    private WebElement addToCart_button;
+    private WebElement addToCartButton;
 
     @FindBy(css = "#search-result-items > li:nth-child(1)")
-    private WebElement product_Item1;
+    private WebElement productItem1;
 
     @FindBy(css = "#checkout-form > button")
-    private WebElement checkOut_Button;
+    private WebElement checkOutButton;
 
     @FindBy(xpath = "//*[@id=\"cart-table\"]/div[3]/div/div[2]/div[1]/div[2]/button")
     private WebElement deleteLink;
@@ -61,25 +61,25 @@ public class ShoppingCartPage extends PageObject {
     }
 
     public void SelectProducts() {
-        products_Link.click();
+        productsLink.click();
         ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
-        price_CheckBox.click();
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", size_CheckBox);
-        size_CheckBox.click();
+        priceCheckBox.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", sizeCheckBox);
+        sizeCheckBox.click();
         ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
-        color_CheckBox.click();
+        colorCheckBox.click();
     }
 
     public void AddToShoppingCart() {
-        product_Item1.click();
+        productItem1.click();
         ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
-        addToCart_button.click();
-        basket_Link.click();
+        addToCartButton.click();
+        basketLink.click();
     }
 
     public boolean IsElementPresent() {
         try {
-            checkOut_Button.isDisplayed();
+            checkOutButton.isDisplayed();
             return true;
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
@@ -87,7 +87,7 @@ public class ShoppingCartPage extends PageObject {
     }
 
     public void ClickOn_basket() {
-        basket_Link.click();
+        basketLink.click();
     }
 
     public void DeleteProductsFromBasket() {
