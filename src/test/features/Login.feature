@@ -1,7 +1,8 @@
 @Login
 Feature: Log in/Log out Page
   This feature verifies the functionality on Orsay Login/Log out Page
-@log-in
+
+  @log-in
   Scenario: Check that user can log in successfully
     Given User open login page
     When User click on Account
@@ -10,7 +11,7 @@ Feature: Log in/Log out Page
       | password | lavraniuc.A7         |
     Then User Alz Stratu is logged in
 
-@log-out
+  @log-out
   Scenario: Check that user can log out from Account Page
     Given User open login page
     And User login with correct username and password
@@ -19,11 +20,11 @@ Feature: Log in/Log out Page
     When  User Click on Sign out button
     Then User is redirected on Registration Page
 
-@search
+  @search
   Scenario: Adding a product to the system should automatically make it searchable
     Given User open login page
     When User enters the type of product into search text-box
-    |typeOfProduct| blugi|
+      | typeOfProduct | blugi |
     Then The type of searched product will be displayed on the page
 
 
