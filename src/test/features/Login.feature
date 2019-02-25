@@ -13,7 +13,7 @@ Feature: Log in/Log out Page
 @log-out
   Scenario: Check that user can log out from Account Page
     Given User open login page
-    And User log in with correct username and password
+    And User login with correct username and password
       | username | Stratu.Alz@gmail.com |
       | password | lavraniuc.A7         |
     When  User Click on Sign out button
@@ -21,7 +21,7 @@ Feature: Log in/Log out Page
 
 @search
   Scenario: Adding a product to the system should automatically make it searchable
-    Given User is on login page
+    Given User open login page
     When User enters the type of product into search text-box
     |typeOfProduct| blugi|
     Then The type of searched product will be displayed on the page

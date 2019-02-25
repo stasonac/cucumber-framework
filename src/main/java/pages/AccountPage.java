@@ -17,7 +17,7 @@ public class AccountPage extends PageObject {
     private WebElement createAccountTitle;
 
     @FindBy(css = "#dwfrm_login_register > div > button")
-    private WebElement createAnAccountNowButton;
+    private WebElement createAnAccountNewButton;
 
     @FindBy(id = "dwfrm_profile_customer_salutation")
     private WebElement titleDropDown;
@@ -61,18 +61,18 @@ public class AccountPage extends PageObject {
         return accountOwner.getText();
     }
 
-    public boolean IsCreateAnAccountNowButtonEnnabled() {
+    public boolean IsCreateAnAccountNewButtonEnnabled() {
 
         try {
-            return createAnAccountNowButton.isEnabled();
+            return createAnAccountNewButton.isEnabled();
         } catch (Exception e) {
             return false;
         }
 
     }
 
-    public void ClickOn_CreateAnAccountNowButton() {
-        createAnAccountNowButton.click();
+    public void ClickOn_CreateAnAccountNewButton() {
+        createAnAccountNewButton.click();
     }
 
     public String getCreateAccountTitle() {
@@ -99,8 +99,8 @@ public class AccountPage extends PageObject {
         selector.selectByVisibleText(title);
     }
 
-    public void FillRegisterForm(String title, String FirstName, String SureName, String birtDay, String Email, String Password) {
-        String bd[] = birtDay.split(" ");
+    public void FillRegisterForm(String title, String FirstName, String SureName, String birthDay, String Email, String Password) {
+        String bd[] = birthDay.split(" ");
         SelectOptionTitle(title);
         firstNameTextBox.sendKeys(FirstName);
         surnameTextBox.sendKeys(SureName);

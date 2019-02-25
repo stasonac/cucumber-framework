@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends PageObject {
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[3]/div[2]/a/i")
+    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[3]/div[2]/a/i")
     private WebElement iconAccount;
 
     @FindBy(css = "#dwfrm_login input[type='text']")
@@ -23,16 +23,16 @@ public class LoginPage extends PageObject {
     @FindBy(css = "#main > div.container > div.breadcrumb > span")
     private WebElement LogareMessage;
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[3]/div[1]/span/i")
+    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[3]/div[1]/span/i")
     private WebElement searchLink;
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[4]/div/form/input[1]")
+    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[4]/div/form/input[1]")
     private WebElement searchTextBox;
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/div/div[4]/div/form/button[2]/span")
+    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[4]/div/form/button[2]/span")
     private WebElement searchButton;
 
-    @FindBy(css="#main > div.container.clearfix > div.content-banner > h1")
+    @FindBy(css = "#main > div.container.clearfix > div.content-banner > h1")
     private WebElement messageForSearchedProducts;
 
     public LoginPage(WebDriver driver) {
@@ -67,16 +67,16 @@ public class LoginPage extends PageObject {
     }
 
     public String getLoginMessage() {
-        return LogareMessage.getText();}
+        return LogareMessage.getText();
+    }
 
-     public void SearchProducts(String typeOfProduct){
+    public void SearchProducts(String typeOfProduct) {
         searchLink.click();
         searchTextBox.sendKeys(typeOfProduct);
         searchButton.click();
-     }
-     public String getMessageOfSearchedProduct(){
+    }
+
+    public String getMessageOfSearchedProduct() {
         return messageForSearchedProducts.getText();
-     }
-
-
+    }
 }
