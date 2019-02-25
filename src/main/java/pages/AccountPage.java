@@ -35,7 +35,7 @@ public class AccountPage extends PageObject {
     private WebElement monthDropDown;
 
     @FindBy(id = "dwfrm_profile_customer_yearOfBirth")
-    private WebElement year_DryearDropDown;
+    private WebElement yearDryearDropDown;
 
     @FindBy(id = "dwfrm_profile_customer_email")
     private WebElement emailTextBox;
@@ -90,7 +90,7 @@ public class AccountPage extends PageObject {
     }
 
     public void SelectYearOfBirth(String value) {
-        Select year = new Select(year_DryearDropDown);
+        Select year = new Select(yearDryearDropDown);
         year.selectByValue(value);
     }
 
@@ -99,8 +99,8 @@ public class AccountPage extends PageObject {
         selector.selectByVisibleText(title);
     }
 
-    public void FillRegisterForm(String title, String FirstName, String SureName, String birthDay, String Email, String Password) {
-        String bd[] = birthDay.split(" ");
+    public void FillRegisterForm(String title, String FirstName, String SureName, String birtday, String Email, String Password) {
+        String bd[] = birtday.split(" ");
         SelectOptionTitle(title);
         firstNameTextBox.sendKeys(FirstName);
         surnameTextBox.sendKeys(SureName);
@@ -122,6 +122,5 @@ public class AccountPage extends PageObject {
     public void ClickOn_SignOut_Button (){
         signOutButton.click();
     }
-
 
 }

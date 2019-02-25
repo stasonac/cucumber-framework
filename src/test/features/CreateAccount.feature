@@ -8,12 +8,12 @@ Feature:CreateAccount
     And User navigate to create new account page
     When User fill new account form and submit it
       | title     | Dna                  |
-      | firstName | Alp                  |
+      | firstName | Mal                  |
       | surname   | Stratu               |
-      | birtday   | 4 Iulie 1987         |
-      | email     | Stratu.Alp@gmail.com |
-      | password  | lavraniuc.A6         |
-    Then New Account Alp Stratu is created
+      | birtday   | 4 Iulie 1988         |
+      | email     | Stratu.Mal@gmail.com |
+      | password  | lavraniuc.A15        |
+    Then New Account Mal Stratu is created
 
 
 
