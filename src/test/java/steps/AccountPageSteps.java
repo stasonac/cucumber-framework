@@ -35,4 +35,29 @@ public class AccountPageSteps extends Common {
         String expectedMessage = String.format("Bine ați revenit, %s!", user);
         Assert.assertEquals(expectedMessage, accountPO.getWelcomeAccountOwnerMessage());
     }
+
+    @When("^User click on Change password link$")
+    public void userClickOnChangePasswordLink() {
+        accountPO.ClickOn_ChangePassword_Link();
+
+    }
+
+    @And("^User fill change password form and confirm it$")
+    public void userFillChangePasswordFormAndConfirmIt(DataTable table) {
+        Map<String, String> inputs = table.asMap(String.class, String.class);
+        accountPO.FillChangePassword_Form(
+                inputs.get("currentPass"),
+                inputs.get("newPass"),
+                inputs.get("confirmPass")
+        );
+
+    }
+
+    @Then("^Confirmation Message is displayed$")
+    public void confirmationMessageIsDisplayed() {
+        Assert.assertEquals("Bine ați revenit, Alz Stratu!", accountPO.getConfirmationMessage());
+    }
 }
+
+
+

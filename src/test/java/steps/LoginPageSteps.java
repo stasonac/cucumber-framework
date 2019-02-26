@@ -59,6 +59,12 @@ public class LoginPageSteps extends Common {
         loginPO.ClickOn_ItemAccount();
     }
 
+
+    @Then("^User (.*) is logged in$")
+    public void userIsLoggedIn(String user) {
+        String expectedMessage = String.format("Bine ați revenit, %s!", user);
+        Assert.assertEquals(expectedMessage, accountPO.getWelcomeAccountOwnerMessage());
+    }
     @And("^User login with correct username and password$")
     public void userLoginWithCorrectUsernameAndPassword(DataTable table) {
         Map<String, String> inputs = table.asMap(String.class, String.class);
@@ -67,12 +73,7 @@ public class LoginPageSteps extends Common {
                 inputs.get("username"),
                 inputs.get("password")
         );
-    }
 
-    @Then("^User (.*) is logged in$")
-    public void userIsLoggedIn(String user) {
-        String expectedMessage = String.format("Bine ați revenit, %s!", user);
-        Assert.assertEquals(expectedMessage, accountPO.getWelcomeAccountOwnerMessage());
     }
 
     @When("^User Click on Sign out button$")
@@ -96,6 +97,8 @@ public class LoginPageSteps extends Common {
     public void theTypeOfSearchedProductWillBeDisplayedOnThePage() {
         Assert.assertEquals("Rezultate pentru (blugi)", loginPO.getMessageOfSearchedProduct());
     }
+
+
 }
 
 

@@ -40,8 +40,10 @@ public class ShoppingCartPageSteps extends Common {
 
     @Then("^Details has been changed successfully$")
     public void detailsHasBeenChangedSuccessfully() {
+        Assert.assertEquals(true,shoppingCA.isEnabled());
 
     }
+
 
 
 }

@@ -27,5 +27,11 @@ Feature: Log in/Log out Page
       | typeOfProduct | blugi |
     Then The type of searched product will be displayed on the page
 
+  @language
+  Scenario:Change Language from localization icon on Dashboard Page
+    Given User open login page
+    When User click on localization icon and select language
+    Then The page is translated successfully
+
 
 

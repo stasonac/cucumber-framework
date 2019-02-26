@@ -13,19 +13,19 @@ public class ShoppingCartPage extends PageObject {
     @FindBy(css = "#mini-cart > div.mini-cart-total > a > i")
     private WebElement basketLink;
 
-    @FindBy(xpath = "//*[@id=\"wrapper\"]/header/div/nav/ul/li[2]/a")
+    @FindBy(xpath = "//*[@id='wrapper']/header/div/nav/ul/li[2]/a")
     private WebElement productsLink;
 
-    @FindBy(css = "//*[@id=\"secondary\"]/div/div[2]/div[2]/h3")
+    @FindBy(css = "//*[@id='secondary']/div/div[2]/div[2]/h3")
     private WebElement PriceLink;
 
     @FindBy(css = "#secondary div:nth-child(4) ul > li:nth-child(3) > a")
     private WebElement priceCheckBox;
 
-    @FindBy(xpath = "//*[@id=\"swatch-36_s\"]")
+    @FindBy(xpath = "//*[@id='swatch-36_s']")
     private WebElement sizeCheckBox;
 
-    @FindBy(xpath = "//*[@id=\"swatch-green\"]/span")
+    @FindBy(xpath = "//*[@id='swatch-green']/span")
     private WebElement colorCheckBox;
 
     @FindBy(css = "#add-to-cart")
@@ -37,7 +37,7 @@ public class ShoppingCartPage extends PageObject {
     @FindBy(css = "#checkout-form > button")
     private WebElement checkOutButton;
 
-    @FindBy(xpath = "//*[@id=\"cart-table\"]/div[3]/div/div[2]/div[1]/div[2]/button")
+    @FindBy(xpath = "//*[@id='cart-table']/div[3]/div/div[2]/div[1]/div[2]/button")
     private WebElement deleteLink;
 
     @FindBy(css = "#primary > div > div.cart-empty > p")
@@ -54,6 +54,7 @@ public class ShoppingCartPage extends PageObject {
 
     @FindBy(css = "#add-to-cart")
     private WebElement updatedButton;
+
 
 
     public ShoppingCartPage(WebDriver driver) {
@@ -103,6 +104,17 @@ public class ShoppingCartPage extends PageObject {
         if (!selectableColors.isEmpty()) selectableColors.get(0).click();
         if (!selectableSizes.isEmpty()) selectableSizes.get(0).click();
         updatedButton.click();
+    }
+
+    public  boolean isEnabled(){
+        try{
+            updatedButton.isEnabled();
+            return true;
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
+
     }
 }
 

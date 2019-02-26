@@ -48,8 +48,6 @@ public class LoginPage extends PageObject {
         passwordTextBox.clear();
         userNameTextBox.sendKeys(username);
         passwordTextBox.sendKeys(password);
-        ((JavascriptExecutor) driver).executeScript("scroll(0,400)");
-
 //        try {
 //            cancelMarketingInfo.click();
 //        } catch (NoSuchElementException e) {
@@ -66,7 +64,8 @@ public class LoginPage extends PageObject {
         }
     }
 
-    public String getLoginMessage() {
+    public String getLoginMessage()
+    {
         return LogareMessage.getText();
     }
 
@@ -76,7 +75,9 @@ public class LoginPage extends PageObject {
         searchButton.click();
     }
 
-    public String getMessageOfSearchedProduct() {
+    public String getMessageOfSearchedProduct()
+    {
         return messageForSearchedProducts.getText();
     }
+
 }

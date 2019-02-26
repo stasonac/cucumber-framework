@@ -46,12 +46,29 @@ public class AccountPage extends PageObject {
     @FindBy(css = "input.password")
     private WebElement passwordTextBox;
 
-    @FindBy(css = " #RegistrationForm > div:nth-child(12) > div > div > div > div > button")
+    @FindBy(css = "#RegistrationForm > div:nth-child(12) > div > div > div > div > button")
     private WebElement toRegisterButton;
 
     @FindBy(css = "#primary > div.account-header-wrapper > a")
     private WebElement signOutButton;
 
+    @FindBy(xpath = "//*[@id='secondary']/nav/div/div/div[2]/div[1]/ul/li[1]/ul/li[4]/a")
+    private WebElement changePasswordLink;
+
+    @FindBy(css = "input.currentPassword")
+    private WebElement currentPassTextBox;
+
+    @FindBy(css = "input.js-password_field")
+    private WebElement newPassTextBox;
+
+    @FindBy(css = "input.js-passwordconfirm_field")
+    private WebElement confirmNewPassTextBox;
+
+    @FindBy(xpath = "//*[@id='ChangePassowrdForm']/div[4]/div/div/button")
+    private WebElement changePassButton;
+
+    @FindBy(css = "#primary > div.account-header-wrapper > h4")
+    private WebElement confirmMessage;
 
     public AccountPage(WebDriver driver) {
         super(driver);
@@ -75,8 +92,8 @@ public class AccountPage extends PageObject {
         createAnAccountNewButton.click();
     }
 
-    public String getCreateAccountTitle() {
-        return createAccountTitle.getText();
+    public String getConfirmationMessage() {
+        return confirmMessage.getText();
     }
 
     public void SelectDateOfBirth(String value) {
@@ -99,8 +116,8 @@ public class AccountPage extends PageObject {
         selector.selectByVisibleText(title);
     }
 
-    public void FillRegisterForm(String title, String FirstName, String SureName, String birtday, String Email, String Password) {
-        String bd[] = birtday.split(" ");
+    public void FillRegisterForm(String title, String FirstName, String SureName, String birthday, String Email, String Password) {
+        String[] bd = birthday.split("");
         SelectOptionTitle(title);
         firstNameTextBox.sendKeys(FirstName);
         surnameTextBox.sendKeys(SureName);
@@ -119,8 +136,21 @@ public class AccountPage extends PageObject {
         toRegisterButton.click();
     }
 
-    public void ClickOn_SignOut_Button (){
+    public void ClickOn_SignOut_Button() {
         signOutButton.click();
     }
 
+    public void ClickOn_ChangePassword_Link() {
+        changePasswordLink.click();
+    }
+
+    public void FillChangePassword_Form(String currentPass, String newPass, String confirmPass) {
+        currentPassTextBox.sendKeys(currentPass);
+        newPassTextBox.sendKeys(newPass);
+        confirmNewPassTextBox.sendKeys(confirmPass);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", changePassButton);
+        changePassButton.click();
+    }
+
 }
+
