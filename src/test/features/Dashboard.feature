@@ -12,6 +12,6 @@
     @language
     Scenario:Change Language from localization icon on Dashboard Page
       Given User open login page
-      When User click on localization icon and select language
+      When User change language to Deutschland
       Then The page is translated successfully
 

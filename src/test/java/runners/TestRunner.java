@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         glue = {"steps"},
         plugin = {"pretty", "html:target/cucumber-reports"},
         monochrome = true,
-        tags = {"@add"}
+        tags = {"@language"}
 )
 public class TestRunner {
 }

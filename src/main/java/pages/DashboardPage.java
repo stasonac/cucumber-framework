@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class DashboardPage extends PageObject {
 
     public DashboardPage(WebDriver driver) {
@@ -21,8 +23,11 @@ public class DashboardPage extends PageObject {
     @FindBy(css = "#main > div.container.clearfix > div.content-banner > h1")
     private WebElement messageForSearchedProducts;
 
-    @FindBy(css ="span[class=utility-text]")
+    @FindBy(css = "div[class='top-naigation-menu-item header-localization']")
     private WebElement languageIcon;
+
+    @FindBy(css = "div[class='top-naigation-menu-item header-localization'] div.locale-item span.country-name")
+    private List<WebElement> languagesList;
 
 
     public void SearchProducts(String typeOfProduct) {
@@ -36,5 +41,14 @@ public class DashboardPage extends PageObject {
         return messageForSearchedProducts.getText();
     }
 
+    public void selectLanguage(String lang) {
+        languageIcon.click();
 
+        languagesList.stream()
+                .filter(element -> element.getText().equals(lang))
+                .findFirst()
+                .get()
+                .click();
+
+    }
 }

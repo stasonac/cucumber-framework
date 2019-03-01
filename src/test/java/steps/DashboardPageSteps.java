@@ -21,13 +21,12 @@ public class DashboardPageSteps extends  Common{
         Assert.assertEquals("Rezultate pentru (blugi)", dashboardDA.getMessageOfSearchedProduct());
     }
 
-    @When("^User click on localization icon and select language$")
-    public void userClickOnLocalizationIconAndSelectLanguage() {
-
+    @When("^User change language to (.*)$")
+    public void userClickOnLocalizationIconAndSelectLanguage(String language) {
+        dashboardDA.selectLanguage(language);
     }
 
     @Then("^The page is translated successfully$")
     public void thePageIsTranslatedSuccessfully() {
     }
-
 }
