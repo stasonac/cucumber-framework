@@ -23,17 +23,7 @@ public class LoginPage extends PageObject {
     @FindBy(css = "#main > div.container > div.breadcrumb > span")
     private WebElement LogareMessage;
 
-    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[3]/div[1]/span/i")
-    private WebElement searchLink;
 
-    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[4]/div/form/input[1]")
-    private WebElement searchTextBox;
-
-    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[4]/div/form/button[2]/span")
-    private WebElement searchButton;
-
-    @FindBy(css = "#main > div.container.clearfix > div.content-banner > h1")
-    private WebElement messageForSearchedProducts;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -69,15 +59,5 @@ public class LoginPage extends PageObject {
         return LogareMessage.getText();
     }
 
-    public void SearchProducts(String typeOfProduct) {
-        searchLink.click();
-        searchTextBox.sendKeys(typeOfProduct);
-        searchButton.click();
-    }
-
-    public String getMessageOfSearchedProduct()
-    {
-        return messageForSearchedProducts.getText();
-    }
 
 }

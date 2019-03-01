@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.AccountPage;
+import pages.DashboardPage;
 import pages.LoginPage;
 import pages.ShoppingCartPage;
 
@@ -35,6 +36,8 @@ public class LoginPageSteps extends Common {
         loginPO = new LoginPage(driver);
         accountPO = new AccountPage(driver);
         shoppingCA = new ShoppingCartPage(driver);
+        dashboardDA = new DashboardPage(driver);
+
     }
 
     @After
@@ -86,17 +89,7 @@ public class LoginPageSteps extends Common {
         Assert.assertEquals("Logare", loginPO.getLoginMessage());
     }
 
-    @When("^User enters the type of product into search text-box$")
-    public void userEntersTheTypeOfProductIntoSearchTextBox(DataTable table) {
-        Map<String, String> inputs = table.asMap(String.class, String.class);
-        loginPO.SearchProducts(
-                inputs.get("typeOfProduct"));
-    }
 
-    @Then("^The type of searched product will be displayed on the page$")
-    public void theTypeOfSearchedProductWillBeDisplayedOnThePage() {
-        Assert.assertEquals("Rezultate pentru (blugi)", loginPO.getMessageOfSearchedProduct());
-    }
 
 
 }
