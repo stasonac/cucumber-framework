@@ -29,6 +29,19 @@ public class DashboardPage extends PageObject {
     @FindBy(css = "div[class='top-naigation-menu-item header-localization'] div.locale-item span.country-name")
     private List<WebElement> languagesList;
 
+    @FindBy(xpath = "//*[@id='wrapper']/header/div/div/div[1]/div[2]/div[1]/span[1]")
+    private WebElement utilityTextLanguage;
+
+    @FindBy(css = "#wrapper > header > div > nav > ul > li:nth-child(4) > a")
+    private WebElement trendsLink;
+
+    @FindBy(css= "#select2-grid-sort-header-container")
+    private WebElement filtersDropdown;
+
+    @FindBy(css="div [class='sort-by-select-wrapper'] span.sort-by-toggle-sort")
+    private List<WebElement>filterList;
+
+
 
     public void SearchProducts(String typeOfProduct) {
         searchLink.click();
@@ -49,6 +62,16 @@ public class DashboardPage extends PageObject {
                 .findFirst()
                 .get()
                 .click();
-
     }
+
+    public String getUtilityTextLanguage(){
+        return utilityTextLanguage.getText();
+    }
+
+
+    public void selectCategory(){
+        trendsLink.click();
+    }
+
+
 }

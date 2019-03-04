@@ -28,5 +28,20 @@ public class DashboardPageSteps extends  Common{
 
     @Then("^The page is translated successfully$")
     public void thePageIsTranslatedSuccessfully() {
+        Assert.assertEquals("DE, EUR",dashboardDA.getUtilityTextLanguage());
     }
+
+
+    @When("^The user filters the products by (.*)$")
+    public void theUserFiltersTheProductsByPretDeLaMicLaMare(String filter) {
+        dashboardDA.selectCategory();
+        dashboardDA.selectFilter(filter);
+
+    }
+
+    @Then("^New list of filtering products are updated$")
+    public void newListOfFilteringProductsAreUpdated() {
+    }
+
+
 }
